@@ -3,10 +3,10 @@
 
 <template>
   <main class="space-grotesk-medium">
-    <nav>
-      <p class="logo">
+    <nav id="logo">
+      <a href="/" class="logo">
         adamkeyes
-      </p>
+      </a>
       <ul class="menu">
         <li class="menu-items">
           <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,9 +47,9 @@
         <p class="mt-5 md:mt-[3.75rem] xl:mt-[2.6875rem]">
           Based in the UK, I'm a front-end developer passionate about building accessible web apps that users love.
         </p>
-        <button class="btn mt-6 md:mt-[2.125rem] xl:mt-[4.125rem]">
+        <a href="#contact" class="btn mt-6 md:mt-[2.125rem] xl:mt-[4.125rem]">
           Contact me
-        </button>
+        </a>
       </div>
     </section>
     <hr class="w-full text-[#979797] mt-[5rem] md:mt-[3.75rem] xl:mt-[13.6875rem]">
@@ -110,9 +110,9 @@
         <h1 class="space-grotesk-bold">
           Projects
         </h1>
-        <button class="btn">
+        <a href="#contact" class="btn">
           Contact me
-        </button>
+        </a>
       </header>
       <div class="projects-container mt-20">
         <div class="project-item">
@@ -232,7 +232,7 @@
       </div>
     </section>
     <section class="footer">
-      <div class="footer-contact">
+      <div class="footer-contact" id="contact">
         <img src="https://res.cloudinary.com/odumz/image/upload/v1717767165/projects/spdp-ring-vector_xqn7m6.png" alt="spdp ring vector" class="absolute object-cover top-[540px] md:top-96 xl:top-[15.8125rem] left-0 -mx[165px]">
         <header>
           <h1>
@@ -243,19 +243,19 @@
           </p>
         </header>
         <form>
-          <input type="text" class="bg-transparent border-b" placeholder="NAME">
-          <input type="email" class="bg-transparent border-b" placeholder="EMAIL">
-          <textarea cols="50" rows="10" class="bg-transparent border-b" placeholder="MESSAGE"></textarea>
+          <input type="text" class="bg-transparent border-b pb-4" placeholder="NAME">
+          <input type="email" class="bg-transparent border-b pb-4" placeholder="EMAIL">
+          <textarea cols="50" rows="5" class="bg-transparent border-b pb-4" placeholder="MESSAGE"></textarea>
           <button class="btn justify-self-end">
             SEND MESSAGE
           </button>
         </form>
       </div>
       <hr class="w-full text-[#979797] mt-[5.4375rem] md:mt-[5.75rem]">
-      <nav>
-        <p class="logo">
+      <nav class="mb-10 md:mb-[5.75rem]">
+        <a href="#logo" class="logo">
           adamkeyes
-        </p>
+        </a>
         <ul class="menu">
           <li class="menu-items">
             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -290,6 +290,10 @@ main {
 
 nav {
   @apply relative z-10 flex items-center justify-between mt-10;
+}
+
+.logo {
+  @apply hover:text-spdp-green transition-all duration-300 ease-in-out;
 }
 
 .menu {
