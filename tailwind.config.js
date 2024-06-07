@@ -18,11 +18,33 @@ export default {
   theme: {
     extend: {
       colors: {
-        'color-spdp-black': withOpacity('--color-spdp-black'),
-        'color-spdp-green': withOpacity('--color-spdp-green'),
-        'color-spdp-gray': withOpacity('--color-spdp-gray'),
-        'color-spdp-ash': withOpacity('--color-spdp-ash')
+        'spdp-black': withOpacity('--color-spdp-black'),
+        'spdp-green': withOpacity('--color-spdp-green'),
+        'spdp-gray': withOpacity('--color-spdp-gray'),
+        'spdp-ash': withOpacity('--color-spdp-ash')
       },
+      cursor: {
+        default: 'url(https://res.cloudinary.com/odumz/image/upload/v1717773833/projects/cursor_x4dlpf.png), default'
+      },
+      keyframes: {
+        flyIn: {
+          '0%': { transform: 'translateY(40px)' },
+          '50%': { transform: 'translateY(0)' },
+        },
+        flyInSide: {
+          '0%': { transform: 'translateX(40px)' },
+          '50%': { transform: 'translateX(0)' },
+        },
+        flyOut: {
+          '0%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        }
+      },
+      animation: {
+        flyIn: 'flyIn 0.5s linear',
+        flyInSide: 'flyInSide 0.5s linear',
+        flyOut: 'flyOut 0.1s linear',
+      }
     },
   },
   plugins: [],
