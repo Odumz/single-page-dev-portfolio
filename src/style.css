@@ -33,7 +33,7 @@
     }
 
     h1 {
-      @apply text-[2.5rem] xl:text-[5.5rem] leading-8 xl:leading-[5.5rem] tracking-[-0.0712rem] xl:tracking-[-0.1563rem];
+      @apply text-[2.5rem] md:text-[4.5rem] xl:text-[5.5rem] leading-8 md:leading-[4.5rem] xl:leading-[5.5rem] tracking-[-0.0712rem] md:tracking-[-0.1281rem] xl:tracking-[-0.1563rem];
     }
 
     h2 {

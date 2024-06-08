@@ -4,7 +4,7 @@
 <template>
   <main class="space-grotesk-medium">
     <nav id="logo">
-      <a href="/" class="logo">
+      <a href="/" class="logo space-grotesk-bold">
         adamkeyes
       </a>
       <ul class="menu">
@@ -31,18 +31,30 @@
       </ul>
     </nav>
     <section class="landing">
-      <img src="https://res.cloudinary.com/odumz/image/upload/v1717767167/projects/spdp-profile-image_f4wmqf.png" alt="spdp profile picture" class="absolute object-cover h-[45rem] -top-16 -right-2" height="720" width="445">
-      <img src="https://res.cloudinary.com/odumz/image/upload/v1717767487/projects/spdp-landing-ring-vector_cnenjd.png" alt="spdp ring vector" class="absolute object-cover top-8 md:top-6 xl:top-[3.875rem] -mx-4 md:-mx-8 lg:-mx-20 xl:-mx-[10.3125rem]">
-      <img src="https://res.cloudinary.com/odumz/image/upload/v1717773833/projects/cursor_x4dlpf.png" alt="spdp profile picture" class="absolute object-cover w-[8.0625rem] h-[8.0625rem] top-[28.125rem] right-1/3" height="720" width="445">
-      <div>
-        <h1 class="space-grotesk-bold">
+      <img src="https://res.cloudinary.com/odumz/image/upload/v1717767167/projects/spdp-profile-image_f4wmqf.png" alt="spdp profile picture" class="hidden xl:flex absolute object-cover h-[45rem] -top-16 -right-9 xl:-right-2">
+      <img src="https://res.cloudinary.com/odumz/image/upload/v1717829481/projects/spdp-profile-image-mobile_u0tazd.png" alt="spdp profile picture" class="md:hidden absolute object-cover h-[23.9375rem] -top-24 right-20 z-10">
+      <img src="https://res.cloudinary.com/odumz/image/upload/v1717833477/projects/spdp-profile-image-tab_ut2ljp.png" alt="spdp profile picture" class="hidden md:flex xl:hidden absolute object-cover h-[37.5rem] -top-24 right-0">
+      <img src="https://res.cloudinary.com/odumz/image/upload/v1717767487/projects/spdp-landing-ring-vector_cnenjd.png" alt="spdp ring vector" class="absolute object-cover top-8 md:top-6 xl:top-[3.875rem] -left-40 -mx-4 md:-mx-8 lg:-mx-20 xl:-mx-[10.3125rem]">
+      <img src="https://res.cloudinary.com/odumz/image/upload/v1717773833/projects/cursor_x4dlpf.png" alt="spdp circle vector" class="absolute object-cover w-[8.0625rem] h-[8.0625rem] top-[10.125rem] md:top-[23.625rem] xl:top-[28.125rem] -right-20 xl:right-[30%]" height="720" width="445">
+      <div class="h-full">
+        <h1 class="space-grotesk-bold md:hidden xl:flex">
           Nice to meet you!
         </h1>
-        <h1 class="space-grotesk-bold">
+        <h1 class="space-grotesk-bold md:hidden xl:flex">
           I'm
           <span>
             Adam Keyes
           </span>
+          .
+        </h1>
+        <h1 class="space-grotesk-bold hidden md:flex xl:hidden">
+          Nice to <br >meet you! I'm
+        </h1>
+        <h1 class="space-grotesk-bold hidden md:flex xl:hidden">
+          <span>
+            Adam Keyes
+          </span>
+          .
         </h1>
         <p class="mt-5 md:mt-[3.75rem] xl:mt-[2.6875rem]">
           Based in the UK, I'm a front-end developer passionate about building accessible web apps that users love.
@@ -54,7 +66,7 @@
     </section>
     <hr class="w-full text-[#979797] mt-[5rem] md:mt-[3.75rem] xl:mt-[13.6875rem]">
     <section class="skills">
-      <img src="https://res.cloudinary.com/odumz/image/upload/v1717767165/projects/spdp-ring-vector_xqn7m6.png" alt="spdp ring vector" class="absolute object-cover top-[540px] md:top-96 xl:top-[15.8125rem] right-0 -mx-[165px] transform rotate-180">
+      <img src="https://res.cloudinary.com/odumz/image/upload/v1717767165/projects/spdp-ring-vector_xqn7m6.png" alt="spdp ring vector" class="absolute object-cover top-[33.75rem] md:top-96 xl:top-[15.8125rem] right-0 -mx-[10.3125rem] transform rotate-180">
       <div class="skill-item">
         <h2 class="space-grotesk-bold">
           HTML
@@ -233,12 +245,12 @@
     </section>
     <section class="footer">
       <div class="footer-contact" id="contact">
-        <img src="https://res.cloudinary.com/odumz/image/upload/v1717767165/projects/spdp-ring-vector_xqn7m6.png" alt="spdp ring vector" class="absolute object-cover top-[540px] md:top-96 xl:top-[15.8125rem] left-0 -mx[165px]">
+        <img src="https://res.cloudinary.com/odumz/image/upload/v1717767165/projects/spdp-ring-vector_xqn7m6.png" alt="spdp ring vector" class="absolute object-cover top-[410px] md:top-[31.25rem] xl:top-[15.8125rem] -left-40">
         <header>
           <h1>
             Contact
           </h1>
-          <p class="w-2/5 mt-5 xl:mt-9">
+          <p class="w-full xl:w-2/5 mt-5 xl:mt-9 text-center md:text-left">
             I would love to hear about your project and how I could help. Please fill in the form, and I'll get back to you as soon as possible.
           </p>
         </header>
@@ -285,15 +297,15 @@
 
 <style scoped>
 main {
-  @apply relative grid content-start mx-4 md:mx-8 lg:mx-20 xl:mx-[10.3125rem] bg-spdp-black cursor-default;
+  @apply relative grid content-start bg-spdp-black cursor-default;
 }
 
 nav {
-  @apply relative z-10 flex items-center justify-between mt-10;
+  @apply relative z-10 grid justify-items-center md:flex items-center justify-center md:justify-between gap-y-5 mt-10 px-4 md:px-8 lg:px-20 xl:px-[10.3125rem];
 }
 
 .logo {
-  @apply hover:text-spdp-green transition-all duration-300 ease-in-out;
+  @apply hover:text-spdp-green transition-all duration-300 ease-in-out text-[1.5rem] md:text-[2rem];
 }
 
 .menu {
@@ -305,23 +317,23 @@ nav {
 }
 
 .landing {
-  @apply relative grid content-start;
+  @apply relative grid content-start px-4 md:px-8 lg:px-20 xl:px-[10.3125rem] max-w-fit overflow-x-clip;
 }
 
 .landing > div {
-  @apply relative grid content-start justify-items-start mt-[20.6875rem] md:mt-[5.625rem] xl:mt-[7.9375rem];
+  @apply relative grid content-start justify-items-center md:justify-items-start mt-[20.6875rem] md:mt-[5.625rem] xl:mt-[7.9375rem] gap-y-1 overflow-x-hidden;
 }
 
 .landing > div > h1 > span {
-  @apply underline underline-offset-[1.125rem] decoration-spdp-green;
+  @apply underline underline-offset-8 md:underline-offset-[.9375rem] xl:underline-offset-[1.125rem] decoration-spdp-green;
 }
 
 .landing > div > p {
-  @apply text-spdp-ash w-2/5;
+  @apply text-spdp-ash mt-10 md:mt-[3.75rem] md:w-[55%] xl:w-2/5 text-center md:text-left;
 }
 
 .skills {
-  @apply relative grid content-start grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-10 md:mt-[3.25rem] xl:mt-[4.5rem] gap-y-6 md:gap-y-[3.25rem] xl:gap-y-[3.625rem];
+  @apply relative grid content-start grid-cols-1 md:grid-cols-2 xl:grid-cols-3 my-10 md:mt-[3.25rem] xl:mt-[4.5rem] gap-y-6 md:gap-y-[3.25rem] xl:gap-y-[3.625rem] px-4 md:px-8 lg:px-20 xl:px-[10.3125rem] overflow-hidden;
 }
 
 .skill-item {
@@ -333,11 +345,11 @@ nav {
 }
 
 .projects {
-  @apply grid content-start my-20 md:my-[6.25rem] xl:my-[8.75rem]
+  @apply grid content-start my-20 md:my-[6.25rem] xl:my-[8.75rem] px-4 md:px-8 lg:px-20 xl:px-[10.3125rem];
 }
 
 .projects > header {
-  @apply flex justify-between
+  @apply flex justify-between items-center
 }
 
 .projects-container {
@@ -361,18 +373,18 @@ nav {
 }
 
 .footer {
-  @apply grid content-start justify-center bg-spdp-gray pt-[3.75rem] xl:pt-[5.25rem] -mx-4 md:-mx-8 lg:-mx-20 xl:-mx-[10.3125rem];
+  @apply grid content-start justify-center bg-spdp-gray pt-[3.75rem] xl:pt-[5.25rem] px-4 md:px-8 lg:px-20 xl:px-[10.3125rem];
 }
 
 .footer-contact {
-  @apply relative grid xl:flex justify-between items-start w-full mx-4 md:mx-8 lg:mx-20 xl:-mx-[10.3125rem];
+  @apply relative grid xl:flex justify-between items-start w-full;
 }
 
 .footer-contact > header {
-  @apply grid content-start justify-items-center;
+  @apply grid content-start justify-items-center xl:justify-items-start;
 }
 
 .footer-contact > form {
-  @apply grid content-start gap-y-8
+  @apply grid content-start gap-y-8 mt-[3.125rem]
 }
 </style>
