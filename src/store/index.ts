@@ -32,7 +32,7 @@ export const useContactStore = defineStore('job', () => {
 
   const SendDetails: any = async (payload: any) => {
     console.log('I have started to send the message', payload)
-    let url: string = `${base_url}/create-job`
+    let url: string = `${base_url}/contactus/create`
     console.log(`the data is ${JSON.stringify(payload)}`)
 
     const details: any = await postData(url, payload)

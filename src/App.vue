@@ -1,4 +1,117 @@
+<script lang="ts">
+import { defineComponent, Ref, ref, reactive } from 'vue'
+
+export default defineComponent({
+  name: 'Portfolio'
+})
+</script>
+
 <script setup lang="ts">
+import { useContactStore } from './store/index';
+import { emailCheck, stringCheck } from './helper/validator';
+import Alert from './components/alert.vue';
+
+const showAlert: Ref<boolean> = ref(false)
+const type: Ref<string> = ref('')
+const message: Ref<string> = ref('')
+const isLoading: Ref<boolean> = ref(false)
+const isDisabled: Ref<boolean> = ref(true)
+
+const changeAlertState: any = (alert: any) => {
+  // const { type, message } = alert;
+  type.value = alert.type
+  message.value = alert.message
+
+  showAlert.value = !showAlert.value
+  setTimeout(() => {
+    showAlert.value = false
+  }, 3500)
+}
+
+const contactStore: any = useContactStore()
+
+interface Contact {
+  name: string
+  email: string
+  message: string
+}
+
+const contact: Contact = {
+  name: '',
+  email: '',
+  message: ''
+}
+
+const hasError: any = reactive({
+  name: false,
+  email: false,
+  message: false
+})
+
+const hasErrorMsg: any = reactive({
+  name: '',
+  email: '',
+  message: ''
+})
+
+const checkError: any = {
+  name: async (value: any) => {
+    const check: any = await stringCheck(value, 'Name')
+    hasError.name = check.hasError
+    hasErrorMsg.name = check.message
+    hasError.name ? (isDisabled.value = true) : (isDisabled.value = false)
+  },
+  email: async (value: any) => {
+    const check: any = await emailCheck(value, 'Email')
+    hasError.email = check.hasError
+    hasErrorMsg.email = check.message
+    hasError.email ? (isDisabled.value = true) : (isDisabled.value = false)
+  },
+  message: async (value: any) => {
+    const check: any = await stringCheck(value, 'Message')
+    hasError.message = check.hasError
+    hasErrorMsg.message = check.message
+    hasError.message ? (isDisabled.value = true) : (isDisabled.value = false)
+  }
+}
+
+const submit: any = async () => {
+  isLoading.value = true
+  let alert: any = {
+    type: '',
+    message: ''
+  }
+  // let alertMessage:string;
+
+  const response: any = await contactStore.SendDetails(contact)
+
+  console.log(`response in form is ${JSON.stringify(response)}`)
+  if (response?.status > 399) {
+    alert.type = 'error'
+    alert.message = `${response.message}`
+    changeAlertState(alert)
+    setTimeout(() => {
+      isLoading.value = false
+    }, 3000)
+  } else if (response?.message) {
+    alert.type = 'error'
+    alert.message = `${response.message}`
+    changeAlertState(alert)
+    setTimeout(() => {
+      isLoading.value = false
+    }, 3000)
+  } else if (response?.status == 200) {
+    alert.type = 'success'
+    alert.message = 'Message sent successfully!'
+    changeAlertState(alert)
+    setTimeout(() => {
+      isLoading.value = false
+    }, 3000)
+  }
+  // emits:('displayAlert', alertMessage)
+  isDisabled.value = true
+}
+
 </script>
 
 <template>
@@ -245,20 +358,55 @@
     </section>
     <section class="footer">
       <div class="footer-contact" id="contact">
+      <div
+        class="fixed top-12 right-10 z-30 grid place-content-center"
+        :class="[showAlert ? '' : 'hidden']"
+      >
+        <Alert
+          @close="showAlert = false"
+          alertName="transaction"
+          :type="type"
+          :message="message"
+        />
+      </div>
         <img src="https://res.cloudinary.com/odumz/image/upload/v1717767165/projects/spdp-ring-vector_xqn7m6.png" alt="spdp ring vector" class="absolute object-cover top-[410px] md:top-[31.25rem] xl:top-[15.8125rem] -left-40">
         <header>
           <h1>
             Contact
           </h1>
-          <p class="w-full xl:w-2/5 mt-5 xl:mt-9 text-center md:text-left">
+          <p class="w-full md:w-3/5 mt-5 xl:mt-9 text-center xl:text-left">
             I would love to hear about your project and how I could help. Please fill in the form, and I'll get back to you as soon as possible.
           </p>
         </header>
         <form>
-          <input type="text" class="bg-transparent border-b pb-4" placeholder="NAME">
-          <input type="email" class="bg-transparent border-b pb-4" placeholder="EMAIL">
-          <textarea cols="50" rows="5" class="bg-transparent border-b pb-4" placeholder="MESSAGE"></textarea>
-          <button class="btn justify-self-end">
+          <div class="relative grid content-start">
+            <input type="text" v-model="contact.name" @blur.prevent="checkError.name(contact.name)" @keyup.prevent="checkError.name(contact.name)" class="bg-transparent outline-none border-b pb-4" :class="[hasError?.name ? 'border-[#FF6F5B]' : 'border-[#979797]']" placeholder="NAME">
+            <svg v-if="hasError.name" class="absolute justify-self-end bottom-3 animate-flyIn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="11.5" stroke="#FF6F5B"/>
+              <rect x="11" y="6" width="2" height="9" rx="1" fill="#FF6F5B"/>
+              <rect x="11" y="17" width="2" height="2" rx="1" fill="#FF6F5B"/>
+            </svg>
+            <p class="absolute top-12 text-[.75rem] leading-4 tracking-[-0.0106rem] text-[#FF6F5B] justify-self-end animate-flyIn">{{ hasErrorMsg?.name }}</p>
+          </div>
+          <div class="relative grid content-start">
+            <input type="email" v-model="contact.email" @blur.prevent="checkError.email(contact.email)" @keyup.prevent="checkError.email(contact.email)" class="bg-transparent outline-none border-b pb-4" :class="[hasError?.email ? 'border-[#FF6F5B]' : 'border-[#979797]']" placeholder="EMAIL">
+            <svg v-if="hasError.email" class="absolute justify-self-end bottom-3 animate-flyIn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="11.5" stroke="#FF6F5B"/>
+              <rect x="11" y="6" width="2" height="9" rx="1" fill="#FF6F5B"/>
+              <rect x="11" y="17" width="2" height="2" rx="1" fill="#FF6F5B"/>
+            </svg>
+            <p class="absolute top-12 text-[.75rem] leading-4 tracking-[-0.0106rem] text-[#FF6F5B] justify-self-end animate-flyIn">{{ hasErrorMsg?.email }}</p>
+          </div>
+          <div class="relative grid content-start">
+            <textarea cols="50" rows="5" v-model="contact.message" @blur.prevent="checkError.message(contact.message)" @keyup.prevent="checkError.message(contact.message)" class="bg-transparent outline-none border-b pb-4" :class="[hasError.message ? 'border-[#FF6F5B]' : 'border-[#979797]']" placeholder="MESSAGE"></textarea>
+            <svg v-if="hasError.message" class="absolute justify-self-end bottom-3 animate-flyIn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="11.5" stroke="#FF6F5B"/>
+              <rect x="11" y="6" width="2" height="9" rx="1" fill="#FF6F5B"/>
+              <rect x="11" y="17" width="2" height="2" rx="1" fill="#FF6F5B"/>
+            </svg>
+            <p class="absolute top-[9.375rem] text-[.75rem] leading-4 tracking-[-0.0106rem] text-[#FF6F5B] justify-self-end animate-flyIn">{{ hasErrorMsg?.message }}</p>
+          </div>
+          <button @click.prevent="submit" :class="[isLoading ? 'cursor-progress opacity-65' : '']" class="btn justify-self-end" :isDisabled="isDisabled">
             SEND MESSAGE
           </button>
         </form>
